@@ -1,5 +1,14 @@
 # p2key-service-register
 
+Used Libraries
+--------------
+Embeded Tomcat<br>
+Jersey API<br>
+MySql Driver
+
+Component Diagram
+-----------------
+
 ![alt text](https://github.com/p2key/p2key-service-register/blob/main/resources/img/service_register.png)
 
 URLs of Services
