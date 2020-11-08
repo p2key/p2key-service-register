@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.mu.service.container.model">
+<hibernate-mapping package="com.p2key.service.container.model">
 	<class name="Service" table="SERVICES">
 		<id name="id" column="ID" type="long">
 			<generator class="native" />
