@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping
+	package="com.mu.service.container.model">
+	<class name="Owner" table="OWNERS">
+		<id name="id" column="ID" type="long">
+			<generator class="native" />
+		</id>
+		<property name="name" column="NAME" type="string" />
+		<property name="createDate" column="CREATE_DATE"
+			type="timestamp" />
+		<property name="createdBy" column="CREATED_BY" type="string" />
+		<property name="updateDate" column="UPDATE_DATE"
+			type="timestamp" />
+		<property name="updatedBy" column="UPDATED_BY" type="string" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mu.service.container.model">
+	<class name="Service" table="SERVICES">
+		<id name="id" column="ID" type="long">
+			<generator class="native" />
+		</id>
+		<property name="ownerId" column="OWNER_ID" type="long" />
+		<property name="name" column="NAME" type="string" />
+		<property name="type" column="TYPE" type="string" />
+		<property name="version" column="VERSION" type="string" />
+		<property name="content" column="CONTENT" type="text" />
+		<property name="createDate" column="CREATE_DATE" type="timestamp" />
+		<property name="createdBy" column="CREATED_BY" type="string" />
+		<property name="updateDate" column="UPDATE_DATE" type="timestamp" />
+		<property name="updatedBy" column="UPDATED_BY" type="string" />
+		<property name="isActive" type="java.lang.Boolean">
+		  <column name="IS_ACTIVE" sql-type="tinyint"/>
+		</property>
+	</class>
+</hibernate-mapping>
