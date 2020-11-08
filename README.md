@@ -4,14 +4,14 @@
 
 URLs of Services
 ----------------
-HTTP GET	service/all						Get all services			OK<br>
-HTTP GET	service/all/actives				Get all active services		OK<br>
-HTTP GET	service/all/deactives			Get all deactive services	OK<br>
-HTTP GET	service/{serviceName}			Get a specific service		OK<br>
-HTTP POST	service/insert					Insert a service			OK<br>
-HTTP POST	service/update/{serviceName}	Update a specific service	OK<br>
-HTTP POST	service/delete/{serviceName}	Delete a specific service	OK<br>
-HTTP POST	service/{serviceName}/promote	Promote a specific service<br>
+HTTP GET	service/all						Get all services			<br>
+HTTP GET	service/all/actives				Get all active services		<br>
+HTTP GET	service/all/deactives			Get all deactive services	<br>
+HTTP GET	service/{serviceName}			Get a specific service		<br>
+HTTP POST	service/insert					Insert a service			<br>
+HTTP POST	service/update/{serviceName}	Update a specific service	<br>
+HTTP POST	service/delete/{serviceName}	Delete a specific service	<br>
+HTTP POST	service/{serviceName}/promote	Promote a specific service	<br>
 
 
 URLs of Owners
