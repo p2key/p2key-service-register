@@ -22,15 +22,18 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-		Error error = new Error(401, "Token is required to call the operation.");
-		Response resp = Response.status(Response.Status.UNAUTHORIZED).entity(error).build();
+		
 		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+			Error error = new Error(401, "Token is required to call the operation.");
+			Response resp = Response.status(Response.Status.UNAUTHORIZED).entity(error).build();
 			requestContext.abortWith(resp);
 		} else {
 			try {
 				TokenDTO token = new TokenDTO(authorizationHeader.substring("Bearer".length()).trim());
 				AuthManager.validate(token);
 			} catch (Exception e) {
+				Error error = new Error(401, e.getMessage());
+				Response resp = Response.status(Response.Status.UNAUTHORIZED).entity(error).build();
 				requestContext.abortWith(resp);
 			}
 
