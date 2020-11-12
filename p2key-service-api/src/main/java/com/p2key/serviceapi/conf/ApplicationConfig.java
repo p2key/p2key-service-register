@@ -1,22 +1,22 @@
 package com.p2key.serviceapi.conf;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
 
+import org.glassfish.jersey.server.ResourceConfig;
+
+import com.p2key.service.api.filter.JwtTokenFilter;
+import com.p2key.service.api.services.AuthApi;
 import com.p2key.service.api.services.OwnerApi;
 import com.p2key.service.api.services.ServiceApi;
 
 @ApplicationPath("rest")
-public class ApplicationConfig extends Application {
+public class ApplicationConfig extends ResourceConfig {
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> set = new HashSet<Class<?>>();
-        set.add(OwnerApi.class);
-        set.add(ServiceApi.class);
-        return set;
-    }
+	public ApplicationConfig() {
+		packages("com.p2key.service.api.services", "com.p2key.service.api.filter");
+		register(JwtTokenFilter.class);
+		register(AuthApi.class);
+		register(ServiceApi.class);
+		register(OwnerApi.class);
+	}
 }

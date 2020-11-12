@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.p2key.service.api.filter.JwtToken;
 import com.p2key.service.manager.dto.ServiceDTO;
 import com.p2key.service.manager.mapper.MessageMapper;
 import com.p2key.service.manager.services.ServiceManager;
@@ -16,6 +17,7 @@ import com.p2key.service.manager.services.ServiceManager;
 @Path("service")
 public class ServiceApi {
 
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -25,6 +27,7 @@ public class ServiceApi {
 		return Response.ok(serviceManager.getAllServices(), MediaType.APPLICATION_JSON).status(200).build();
 	}
 
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -52,6 +55,7 @@ public class ServiceApi {
 		return Response.ok(serviceManager.getService(serviceName), MediaType.APPLICATION_JSON).status(200).build();
 	}
 
+	@JwtToken
 	@POST
 	@Path("/insert")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -64,7 +68,7 @@ public class ServiceApi {
 		return Response.ok(MessageMapper.getFailMessage()).status(200).build();
 	}
 	
-	
+	@JwtToken
 	@POST
 	@Path("/{serviceName}/update")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,6 +82,7 @@ public class ServiceApi {
 		return Response.ok(MessageMapper.getFailMessage()).status(200).build();
 	}
 	
+	@JwtToken
 	@POST
 	@Path("/{serviceName}/delete")
 	@Produces(MediaType.APPLICATION_JSON)

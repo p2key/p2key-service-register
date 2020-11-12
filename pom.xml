@@ -6,6 +6,7 @@
   <name>p2key Service Register</name>	
   <packaging>pom</packaging>
 	<modules>
+		<module>p2key-service-security</module>
 		<module>p2key-service-container</module>
 		<module>p2key-service-manager</module>
 		<module>p2key-service-promotion</module>
