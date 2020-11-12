@@ -4,9 +4,9 @@ Used Libraries
 --------------
 Embeded Tomcat<br>
 Jersey API<br>
-MySql Driver
-JWT
-Docker
+MySql Driver<br>
+JWT<br>
+Docker<br>
 
 Component Diagram
 -----------------
