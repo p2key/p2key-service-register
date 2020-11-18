@@ -33,8 +33,10 @@ HTTP GET	owner/all				Get all owners of services<br>
 HTTP POST	owner/insert				Insert a owner<br>
 HTTP POST	owner/update/{ownerName}		Update a specific owner<br>
 HTTP POST	owner/delete/{ownerName}		Delete a specific owner<br>
+</pre>
 
 URLs of Auth
 --------------
 <pre>
 HTTP POST	auth/token				Get a JWT token("userName:admin, password:pass" using basic auth)<br>
+</pre>
