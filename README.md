@@ -23,8 +23,15 @@ HTTP GET	service/{serviceName}		Get a specific service		<br>
 HTTP POST	service/insert			Insert a service		Required JWT token<br>
 HTTP POST	service/update/{serviceName}	Update a specific service	Required JWT token<br>
 HTTP POST	service/delete/{serviceName}	Delete a specific service	Required JWT token<br>
-HTTP POST	service/{serviceName}/promote	Promote a specific service	<br>
 </pre>
+
+
+URLs of Promotions
+----------------
+<pre>
+HTTP POST	promote/{serviceName}/insert	Insert a service to other environment	<br>
+</pre>
+
 
 URLs of Owners
 --------------
