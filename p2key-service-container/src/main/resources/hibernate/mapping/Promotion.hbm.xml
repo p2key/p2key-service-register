@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.p2key.service.container.model">
+	<class name="Promotion" table="PROMOTIONS">
+		<id name="id" column="ID" type="long">
+			<generator class="native" />
+		</id>
+		<property name="operation" column="OPERATION" type="string" />
+		<property name="endpoint" column="ENDPOINT" type="string" />
+		<property name="environment" column="ENVIRONMENT" type="string" />
+		<property name="timeout" column="TIMEOUT" type="int" />
+	</class>
+</hibernate-mapping>

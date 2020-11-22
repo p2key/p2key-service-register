@@ -15,5 +15,6 @@
 		<property name="current_session_context_class">thread</property>	
 		<mapping resource="hibernate/mapping/Owner.hbm.xml" />
 		<mapping resource="hibernate/mapping/Service.hbm.xml" />
+		<mapping resource="hibernate/mapping/Promotion.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

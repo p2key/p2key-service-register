@@ -16,49 +16,45 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class AuthManager {
 	private static String SECRET_KEY = "oeRaYY7Wo24sDqKSX3IM9ASGmdGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_o9MI0y3eZN2lp9jow55FfXMiINEdt1XR85VipRLSOkT6kSpzs2x-jbLDiz9iFVzkd81YKxMgPA7VfZeQUm4n-mOmnWMaVX30zGFU4L3oPBctYKkl4dYfqYWqRNfrgPJVi5DGFjywgxx0ASEiJHtV72paI3fDR2XwlSkyhhmY-ICjCRmsJN4fX1pdoL8a18-aQrvyu4j0Os6dVPYIoPvvY0SAZtWYKHfM15g7A3HD4cVREf9cUsprCRK93w";
-	
+
 	public static TokenDTO authenticate(AuthDTO auth) {
 		TokenDTO token = null;
-		if("admin".equals(auth.getUserName()) && "pass".equals(auth.getPassword())) {
-			token  =new TokenDTO(createJWT(60000));
+		if ("admin".equals(auth.getUserName()) && "pass".equals(auth.getPassword())) {
+			token = new TokenDTO(createJWT(60000));
 		}
 		return token;
 	}
-	
+
 	public static void validate(TokenDTO token) {
 		decodeJWT(token.getToken());
 	}
-	
+
 	private static String createJWT(long expireTimeMs) {
 
-        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
-        long nowMs = System.currentTimeMillis();
-        Date now = new Date(nowMs);
+		long nowMs = System.currentTimeMillis();
+		Date now = new Date(nowMs);
 
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
-        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+		byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
+		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
-        JwtBuilder builder = Jwts.builder().setId("P2KEY_AUTH")
-                .setIssuedAt(now)
-                .setSubject("service_register")
-                .setIssuer("p2Key")
-                .signWith(signatureAlgorithm, signingKey);
+		JwtBuilder builder = Jwts.builder().setId("P2KEY_AUTH").setIssuedAt(now).setSubject("service_register")
+				.setIssuer("p2Key").signWith(signatureAlgorithm, signingKey);
 
-        if (expireTimeMs >= 0) {
-            long expMs = nowMs + expireTimeMs;
-            Date exp = new Date(expMs);
-            builder.setExpiration(exp);
-        }
+		if (expireTimeMs >= 0) {
+			long expMs = nowMs + expireTimeMs;
+			Date exp = new Date(expMs);
+			builder.setExpiration(exp);
+		}
 
-        return builder.compact();
-    }
-	
-    private static Claims decodeJWT(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
-                .parseClaimsJws(token).getBody();
-        return claims;
-    }
+		return builder.compact();
+	}
+
+	private static Claims decodeJWT(String token) {
+		Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
+				.parseClaimsJws(token).getBody();
+		return claims;
+	}
 
 }
