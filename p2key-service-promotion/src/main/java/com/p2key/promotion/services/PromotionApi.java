@@ -10,16 +10,18 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.p2key.service.manager.dto.MessageDTO;
+import com.p2key.service.manager.services.ManagerFactory;
 import com.p2key.service.manager.services.PromotionManager;
 
 @Path("promote")
 public class PromotionApi {
+	private final PromotionManager promotionManager = ManagerFactory.getPromotionManager();
+	
 	@POST
 	@Path("/{serviceName}/insert")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response promoteService(@PathParam("serviceName") String serviceName) {
-		PromotionManager promotionManager = new PromotionManager();
 		MessageDTO message = promotionManager.insertService(serviceName);
 		return Response.ok(message).status(200).build();
 	}

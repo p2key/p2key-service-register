@@ -19,6 +19,8 @@ import com.p2key.service.security.dto.TokenDTO;
 import com.p2key.service.security.services.AuthManager;
 
 public class PromotionManager {
+	private final AuthManager authManager = new AuthManager();
+	
 	public MessageDTO insertService(String serviceName) {
 		MessageDTO message = new MessageDTO();
 
@@ -33,7 +35,7 @@ public class PromotionManager {
 		AuthDTO auth = new AuthDTO();
 		auth.setUserName("admin");
 		auth.setPassword("pass");
-		TokenDTO token = AuthManager.authenticate(auth);
+		TokenDTO token = authManager.authenticate(auth);
 		invocationBuilder.header("Authorization", "Bearer "+token.getToken());
 		Response response = invocationBuilder.post(Entity.entity(service, MediaType.APPLICATION_JSON));
 		if (response.getStatus() == 200) {

@@ -9,6 +9,7 @@ import com.p2key.service.manager.dto.ServiceDTO;
 import com.p2key.service.manager.mapper.ServiceMapper;
 
 public class ServiceManager {
+	
 	public List<ServiceDTO> getAllServices() {
 		List<Service> models = ServiceOperation.getAllServices();
 		List<ServiceDTO> dtos = ServiceMapper.mapToDtos(models);

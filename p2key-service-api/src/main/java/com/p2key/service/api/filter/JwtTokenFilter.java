@@ -19,6 +19,8 @@ import com.p2key.service.security.services.AuthManager;
 @JwtToken
 @Priority(Priorities.AUTHENTICATION)
 public class JwtTokenFilter implements ContainerRequestFilter {
+	private final AuthManager authManager = new AuthManager();
+	
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
@@ -30,7 +32,7 @@ public class JwtTokenFilter implements ContainerRequestFilter {
 		} else {
 			try {
 				TokenDTO token = new TokenDTO(authorizationHeader.substring("Bearer".length()).trim());
-				AuthManager.validate(token);
+				authManager.validate(token);
 			} catch (Exception e) {
 				Error error = new Error(401, e.getMessage());
 				Response resp = Response.status(Response.Status.UNAUTHORIZED).entity(error).build();
