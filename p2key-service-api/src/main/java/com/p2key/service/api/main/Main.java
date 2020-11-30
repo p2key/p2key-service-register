@@ -2,6 +2,8 @@ package com.p2key.service.api.main;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 
@@ -13,30 +15,33 @@ import org.glassfish.jersey.servlet.ServletContainer;
 
 import com.p2key.serviceapi.conf.ApplicationConfig;
 
+import antlr.StringUtils;
+
 public class Main {
 
-    public static void main(String[] args) throws Exception, LifecycleException {
-    	for(String arg :args) {
-    		new Main().start(Integer.valueOf(arg));
-    	}
-    }
+	public static void main(String[] args) throws Exception, LifecycleException {
+		if (args.length > 0) {
+			new Main().start(Integer.valueOf(args[0]));
+		}
 
-    public void start(int port) throws ServletException, LifecycleException, MalformedURLException {
+	}
 
-        Tomcat tomcat = new Tomcat();
-        tomcat.setPort(port);
+	public void start(int port) throws ServletException, LifecycleException, MalformedURLException {
 
-        Context context = tomcat.addWebapp("/", new File(".").getAbsolutePath());
+		Tomcat tomcat = new Tomcat();
+		tomcat.setPort(port);
 
-        Tomcat.addServlet(context, "jersey-container-servlet", resourceConfig());
-        context.addServletMapping("/*", "jersey-container-servlet");
+		Context context = tomcat.addWebapp("/", new File(".").getAbsolutePath());
 
-        tomcat.start();
-        tomcat.getServer().await();
-    }
+		Tomcat.addServlet(context, "jersey-container-servlet", resourceConfig());
+		context.addServletMapping("/*", "jersey-container-servlet");
 
-    private ServletContainer resourceConfig() {
-        return new ServletContainer(new ResourceConfig(new ApplicationConfig().getClasses()));
-    }
+		tomcat.start();
+		tomcat.getServer().await();
+	}
+
+	private ServletContainer resourceConfig() {
+		return new ServletContainer(new ResourceConfig(new ApplicationConfig().getClasses()));
+	}
 
 }
