@@ -13,5 +13,5 @@ import javax.ws.rs.NameBinding;
 @Retention(RUNTIME)
 @Target({ TYPE, METHOD })
 public @interface JwtToken {
-
+	boolean required() default true;
 }

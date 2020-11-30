@@ -16,13 +16,15 @@ import com.p2key.serviceapi.conf.ApplicationConfig;
 public class Main {
 
     public static void main(String[] args) throws Exception, LifecycleException {
-        new Main().start();
+    	for(String arg :args) {
+    		new Main().start(Integer.valueOf(arg));
+    	}
     }
 
-    public void start() throws ServletException, LifecycleException, MalformedURLException {
+    public void start(int port) throws ServletException, LifecycleException, MalformedURLException {
 
         Tomcat tomcat = new Tomcat();
-        tomcat.setPort(8081);
+        tomcat.setPort(port);
 
         Context context = tomcat.addWebapp("/", new File(".").getAbsolutePath());
 

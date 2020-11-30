@@ -1,4 +1,5 @@
-package com.p2key.service.api.services;
+package com.p2key.promotion.services;
+
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
