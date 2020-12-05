@@ -37,6 +37,7 @@ public class PromotionManager {
 //		auth.setPassword("pass");
 //		TokenDTO token = authManager.authenticate(auth);
 //		invocationBuilder.header("Authorization", "Bearer " + token.getToken());
+		//TODO: send incoming token on http header
 		Response response = invocationBuilder.post(Entity.entity(service, MediaType.APPLICATION_JSON));
 		if (response.getStatus() == 200) {
 			message.setResult(Result.SUCCESS);
