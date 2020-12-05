@@ -32,11 +32,11 @@ public class PromotionManager {
 		Client client = ClientBuilder.newClient();
 		WebTarget webTarget = client.target(promotion.getEndpoint());
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		AuthDTO auth = new AuthDTO();
-		auth.setUserName("admin");
-		auth.setPassword("pass");
-		TokenDTO token = authManager.authenticate(auth);
-		invocationBuilder.header("Authorization", "Bearer "+token.getToken());
+//		AuthDTO auth = new AuthDTO();
+//		auth.setUserName("admin");
+//		auth.setPassword("pass");
+//		TokenDTO token = authManager.authenticate(auth);
+//		invocationBuilder.header("Authorization", "Bearer " + token.getToken());
 		Response response = invocationBuilder.post(Entity.entity(service, MediaType.APPLICATION_JSON));
 		if (response.getStatus() == 200) {
 			message.setResult(Result.SUCCESS);
