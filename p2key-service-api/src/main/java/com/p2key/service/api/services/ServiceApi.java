@@ -61,7 +61,7 @@ public class ServiceApi {
 		boolean result = serviceManager.insertService(service);
 		if (result)
 			return Response.ok(result).status(200).build();
-		return Response.ok(MessageMapper.getFailMessage()).status(200).build();
+		return Response.ok(MessageMapper.getFailMessage()).status(406).build();
 	}
 	
 	@JwtToken

@@ -14,37 +14,36 @@ import com.p2key.service.manager.dto.MessageDTO;
 import com.p2key.service.manager.dto.ServiceDTO;
 import com.p2key.service.manager.enums.PromotionType;
 import com.p2key.service.manager.enums.Result;
-import com.p2key.service.security.dto.AuthDTO;
-import com.p2key.service.security.dto.TokenDTO;
-import com.p2key.service.security.services.AuthManager;
 
 public class PromotionManager {
-	private final AuthManager authManager = new AuthManager();
 	
-	public MessageDTO insertService(String serviceName) {
+	public MessageDTO promotionService(String serviceName, String auth, PromotionType promotionType) {
 		MessageDTO message = new MessageDTO();
 
 		ServiceManager serviceManager = new ServiceManager();
 		ServiceDTO service = serviceManager.getService(serviceName);
 
-		Promotion promotion = PromotionOperation.getPromotion(PromotionType.INSERT.toString());
+		Promotion promotion = PromotionOperation.getPromotion(promotionType.toString());
+		String promotionEndpoint = promotion.getEndpoint();
+		if(PromotionType.UPDATE.equals(promotionType) || PromotionType.DELETE.equals(promotionType)) {
+			promotionEndpoint = promotion.getEndpoint().replaceAll("\\{serviceName\\}", service.getName());
+			
+		}
 
 		Client client = ClientBuilder.newClient();
-		WebTarget webTarget = client.target(promotion.getEndpoint());
+		WebTarget webTarget = client.target(promotionEndpoint);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-//		AuthDTO auth = new AuthDTO();
-//		auth.setUserName("admin");
-//		auth.setPassword("pass");
-//		TokenDTO token = authManager.authenticate(auth);
-//		invocationBuilder.header("Authorization", "Bearer " + token.getToken());
-		//TODO: send incoming token on http header
+		invocationBuilder.header("Authorization", auth);
 		Response response = invocationBuilder.post(Entity.entity(service, MediaType.APPLICATION_JSON));
+		
 		if (response.getStatus() == 200) {
 			message.setResult(Result.SUCCESS);
-			message.setMessage("Service is deployed to upper environment.");
-		} else {
+			message.setMessage("Service promotion is success.");
+		} else if (response.getStatus() == 401) {
 			message.setResult(Result.FAIL);
-			message.setMessage("Service deployment is failed.");
+			message.setMessage("Authorization is failed.");
+		}else {
+			message = response.readEntity(MessageDTO.class);
 		}
 		return message;
 	}
