@@ -29,7 +29,9 @@ HTTP POST	service/delete/{serviceName}	Delete a specific service	Required JWT to
 URLs of Promotions
 ----------------
 <pre>
-HTTP POST	promote/{serviceName}/insert	Insert a service to other environment	<br>
+HTTP POST	promote/{serviceName}/insert	Insert a service to other environment		Required JWT token<br>
+HTTP POST	promote/{serviceName}/update	Update the service on other environment		Required JWT token<br>
+HTTP POST	promote/{serviceName}/delete	Delete the service on other environment		Required JWT token<br>
 </pre>
 
 
