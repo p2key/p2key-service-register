@@ -47,7 +47,9 @@ CREATE TABLE `promotions` (
 --
 
 INSERT INTO `promotions` (`ID`, `OPERATION`, `ENDPOINT`, `ENVIRONMENT`, `TIMEOUT`) VALUES
-(1, 'INSERT', 'http://localhost:8080/service/insert', 'TEST', 5);
+(1, 'INSERT', 'http://localhost:8080/service/insert', 'TEST', 5),
+(2, 'UPDATE', 'http://localhost:8080/service/{serviceName}/update', 'TEST', 5),
+(3, 'DELETE', 'http://localhost:8080/service/{serviceName}/delete', 'TEST', 5);
 
 -- --------------------------------------------------------
 
